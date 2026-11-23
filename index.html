@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>냠냠 - 매일 입는 옷</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="logo" href="#home">냠냠</a>
+  <form class="search" id="searchForm" role="search">
+    <input id="searchInput" type="search" placeholder="상품 이름, 분류, 계절 검색" aria-label="상품 검색">
+    <button type="submit">검색</button>
+  </form>
+  <div class="user-links" id="userLinks"></div>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">메뉴</button>
+  <nav class="main-nav" id="mainNav" aria-label="주 메뉴">
+    <a href="#home">홈</a>
+    <a href="#shop" data-cat="전체">전체상품</a>
+    <a href="#shop" data-cat="상의">상의</a>
+    <a href="#shop" data-cat="하의">하의</a>
+    <a href="#shop" data-cat="아우터">아우터</a>
+    <a href="#shop" data-season="봄">계절별</a>
+    <a href="#benefit">혜택</a>
+  </nav>
+</header>
+
+<main>
+  <section class="view" id="v-home">
+    <div class="hero" id="hero" aria-roledescription="슬라이드">
+      <img class="slide on" src="img/hero-1.svg" alt="봄 셔츠와 와이드 팬츠를 입은 코디">
+      <img class="slide" src="img/hero-2.svg" alt="여름 티셔츠와 반바지 코디">
+      <img class="slide" src="img/hero-3.svg" alt="가을 코트와 니트 코디">
+      <img class="slide" src="img/hero-4.svg" alt="겨울 패딩과 데님 코디">
+      <div class="hero-text"><h1>오늘 뭐 입지? 냠냠에서 골라요</h1><p>가입하면 3,000P를 바로 드려요.</p><a class="btn" href="#shop" data-cat="전체">상품 보러가기</a></div>
+      <div class="dots" id="dots"></div>
+    </div>
+    <div class="perks"><div><b>가입하면 3,000P</b><span>회원가입만 해도 바로 적립돼요</span></div><div><b>최대 7% 적립</b><span>등급이 오를수록 적립률이 커져요</span></div><div><b>5만 원 이상 무료배송</b><span>그보다 적으면 배송비 3,000원</span></div></div>
+    <div class="wrap">
+      <h2>새로 들어왔어요</h2><div class="grid" id="homeGrid"></div>
+      <h2 class="gap">계절별로 골라보기</h2><div class="seasons" id="seasonPick"></div>
+      <h2 class="gap">등급별 혜택</h2><div class="grades" id="homeGrades"></div>
+      <p class="more"><a href="#benefit">혜택 자세히 보기</a></p>
+    </div>
+  </section>
+
+  <section class="view wrap" id="v-shop" hidden>
+    <h2>상품</h2>
+    <div class="filters">
+      <div class="chips" id="catChips" aria-label="분류"></div>
+      <div class="chips" id="seasonChips" aria-label="계절"></div>
+    </div>
+    <p class="count" id="shopCount"></p>
+    <div class="grid" id="shopGrid"></div>
+  </section>
+
+  <section class="view wrap" id="v-product" hidden></section>
+
+  <section class="view wrap" id="v-cart" hidden>
+    <h2>장바구니</h2><div id="cartBody"></div>
+  </section>
+
+  <section class="view wrap" id="v-checkout" hidden>
+    <h2>체험 결제</h2>
+    <p class="notice">체험 결제예요. 실제 결제는 되지 않고 주문 내역만 저장돼요.</p>
+    <div class="two">
+      <form id="orderForm" class="box">
+        <label>받는 사람<input name="rname" required></label>
+        <label>연락처<input name="phone" inputmode="tel" placeholder="010-0000-0000" required></label>
+        <label>주소<input name="addr" required></label>
+        <label>결제 수단<select name="pay"><option>신용카드</option><option>계좌이체</option><option>간편결제</option></select></label>
+        <label>사용할 포인트 <small id="ptHave"></small><input name="usePt" type="number" min="0" value="0" inputmode="numeric"></label>
+        <p class="error" id="orderErr" role="alert"></p>
+        <button class="btn" type="submit">체험 결제하기</button>
+      </form>
+      <div class="box" id="orderSum"></div>
+    </div>
+  </section>
+
+  <section class="view wrap" id="v-done" hidden></section>
+
+  <section class="view wrap narrow" id="v-login" hidden>
+    <h2>로그인</h2>
+    <form id="loginForm" class="box">
+      <label>아이디<input name="id" autocomplete="username" required></label>
+      <label>비밀번호<input name="pw" type="password" autocomplete="current-password" required></label>
+      <p class="error" id="loginErr" role="alert"></p>
+      <button class="btn" type="submit">로그인</button>
+      <p class="sub">아직 회원이 아니에요? <a href="#signup">회원가입</a></p>
+    </form>
+  </section>
+
+  <section class="view wrap narrow" id="v-signup" hidden>
+    <h2>회원가입</h2>
+    <form id="signupForm" class="box">
+      <label>아이디 (영문·숫자 4자 이상)<input name="id" autocomplete="username" required></label>
+      <label>비밀번호 (6자 이상)<input name="pw" type="password" autocomplete="new-password" required></label>
+      <label>이름<input name="name" required></label>
+      <label>이메일<input name="email" type="email" required></label>
+      <p class="error" id="signupErr" role="alert"></p>
+      <button class="btn" type="submit">가입하고 3,000P 받기</button>
+    </form>
+  </section>
+
+  <section class="view wrap" id="v-benefit" hidden></section>
+
+  <section class="view wrap" id="v-mypage" hidden></section>
+</main>
+
+<footer class="site-footer">
+  <p><strong>냠냠</strong> · 20~30대를 위한 매일 입는 옷</p>
+  <p><a href="#benefit">혜택 안내</a> · <a href="#signup">회원가입</a> · <a href="#cart">장바구니</a></p>
+  <p>체험용 쇼핑몰이에요. 실제 결제와 배송은 이루어지지 않습니다.</p>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
+</body>
+</html>
